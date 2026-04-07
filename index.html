@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌊 Ocean Pollution – English Lesson</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean-deep: #0a3d6b;
+    --ocean-mid: #1565a8;
+    --ocean-light: #2196f3;
+    --ocean-bright: #29b6f6;
+    --ocean-pale: #e1f5fe;
+    --coral: #ff6f61;
+    --coral-light: #ffccbc;
+    --sand: #fff8e1;
+    --sun: #ffca28;
+    --green: #26a69a;
+    --green-light: #b2dfdb;
+    --white: #ffffff;
+    --text-dark: #1a2744;
+    --text-mid: #37474f;
+    --radius: 18px;
+    --shadow: 0 6px 24px rgba(10,61,107,0.13);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(160deg, #e1f5fe 0%, #b3e5fc 40%, #e8f5e9 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+  }
+
+  /* ── BUBBLES BACKGROUND ── */
+  .bubbles-bg {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .bubble {
+    position: absolute; border-radius: 50%;
+    background: rgba(33,150,243,0.10);
+    animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0% { transform: translateY(110vh) scale(1); opacity:.7; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity:0; }
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(90deg, var(--ocean-deep), var(--ocean-mid));
+    color: white; padding: 0 24px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 4px 16px rgba(10,61,107,0.25);
+    min-height: 64px;
+  }
+  header h1 { font-family:'Fredoka One'; font-size:1.5rem; letter-spacing:.5px; }
+  header .wave-emoji { font-size:1.8rem; animation: sway 2s ease-in-out infinite; }
+  @keyframes sway { 0%,100%{transform:rotate(-8deg);} 50%{transform:rotate(8deg);} }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; overflow-x: auto; gap: 6px;
+    padding: 14px 20px 0; z-index: 50; position: relative;
+  }
+  .tab-btn {
+    font-family:'Fredoka One'; font-size:.95rem; white-space:nowrap;
+    padding: 10px 22px; border-radius: 14px 14px 0 0;
+    border: none; cursor: pointer; transition: all .2s;
+    background: rgba(255,255,255,0.55); color: var(--ocean-deep);
+    border: 2px solid transparent;
+  }
+  .tab-btn.active {
+    background: white; color: var(--ocean-mid);
+    border-color: var(--ocean-bright); border-bottom-color: white;
+    box-shadow: 0 -2px 10px rgba(33,150,243,0.15);
+  }
+  .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.8); }
+
+  /* ── CONTENT PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .content-wrap {
+    max-width: 860px; margin: 0 auto; padding: 24px 16px 48px;
+    position: relative; z-index: 10;
+  }
+
+  /* ── SECTION CARD ── */
+  .section-card {
+    background: white; border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 28px 28px 24px;
+    margin-bottom: 24px;
+    border-top: 5px solid var(--ocean-bright);
+    animation: fadeUp .4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .section-card.coral-top { border-top-color: var(--coral); }
+  .section-card.green-top { border-top-color: var(--green); }
+  .section-card.sun-top   { border-top-color: var(--sun); }
+
+  .section-title {
+    font-family:'Fredoka One'; font-size:1.35rem; color: var(--ocean-deep);
+    margin-bottom: 18px; display:flex; align-items:center; gap:10px;
+  }
+  .section-title .badge {
+    background: var(--ocean-bright); color:white; border-radius:8px;
+    padding: 2px 10px; font-size:.8rem; font-family:'Nunito'; font-weight:700;
+  }
+
+  /* ── KNOWLEDGE BOX ── */
+  .knowledge-box {
+    background: linear-gradient(135deg, var(--ocean-pale), #e8f5e9);
+    border-radius: 14px; border-left: 5px solid var(--ocean-mid);
+    padding: 14px 18px; margin-top: 18px; font-size:.93rem; line-height:1.7;
+  }
+  .knowledge-box strong { color: var(--ocean-deep); }
+
+  /* ══════════════════════════
+     PART 1 – VOCABULARY CARDS
+  ══════════════════════════ */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+    gap: 20px;
+  }
+  .vocab-card {
+    background: var(--sand);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(10,61,107,0.10);
+    transition: transform .2s, box-shadow .2s;
+    border: 2px solid transparent;
+  }
+  .vocab-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(10,61,107,0.18);
+    border-color: var(--ocean-bright);
+  }
+  .vocab-img {
+    width: 100%; height: 160px; object-fit: cover;
+    background: linear-gradient(135deg, #b3e5fc, #e1f5fe);
+    display: flex; align-items:center; justify-content:center;
+    font-size: 4rem;
+  }
+  .vocab-img img { width:100%; height:100%; object-fit:cover; }
+  .vocab-img .img-fallback { font-size:4rem; }
+  .vocab-body { padding: 14px 16px 16px; }
+  .vocab-word {
+    font-family:'Fredoka One'; font-size:1.25rem; color: var(--ocean-deep);
+    margin-bottom:2px;
+  }
+  .vocab-vn { color: var(--coral); font-weight:700; font-size:.9rem; margin-bottom:8px; }
+  .vocab-en { font-size:.88rem; color: var(--text-mid); margin-bottom:8px; line-height:1.5; }
+  .vocab-en .vn-example { display:none; color:#558b2f; font-style:italic; font-size:.85rem; }
+  .vocab-en.show-vn .vn-example { display:block; }
+  .vocab-actions { display:flex; gap:8px; flex-wrap:wrap; }
+  .audio-btn {
+    display:flex; align-items:center; gap:5px;
+    padding: 6px 13px; border-radius: 20px; border:none; cursor:pointer;
+    font-family:'Nunito'; font-weight:700; font-size:.82rem;
+    transition: all .15s;
+  }
+  .audio-btn.word-btn {
+    background: var(--ocean-mid); color:white;
+  }
+  .audio-btn.word-btn:hover { background: var(--ocean-deep); }
+  .audio-btn.example-btn {
+    background: var(--green); color:white;
+  }
+  .audio-btn.example-btn:hover { background: #00796b; }
+  .toggle-vn-btn {
+    padding: 6px 13px; border-radius: 20px; border: 2px solid var(--coral);
+    background:white; color:var(--coral); cursor:pointer;
+    font-family:'Nunito'; font-weight:700; font-size:.82rem;
+    transition: all .15s;
+  }
+  .toggle-vn-btn:hover { background:var(--coral-light); }
+
+  /* ══════════════════════════
+     PART 2 – READ & WRITE
+  ══════════════════════════ */
+  .question-block {
+    background: var(--ocean-pale);
+    border-radius: 14px; padding:18px 20px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--ocean-mid);
+  }
+  .question-text {
+    font-size:.97rem; line-height:1.7; margin-bottom:12px; font-weight:600;
+  }
+  .question-text .gap-word {
+    display:inline-block; cursor:pointer;
+    color: var(--ocean-mid); text-decoration: underline dotted;
+    font-weight:700;
+  }
+  .answer-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .answer-input {
+    flex:1; min-width:160px; padding:9px 14px; border-radius:10px;
+    border: 2px solid var(--ocean-bright); font-family:'Nunito'; font-size:.93rem;
+    outline:none; transition: border .2s;
+  }
+  .answer-input:focus { border-color: var(--ocean-deep); }
+  .answer-input.correct { border-color: var(--green); background:#e8f5e9; }
+  .answer-input.wrong   { border-color: var(--coral); background:#fce4ec; }
+  .check-btn {
+    padding: 9px 18px; border-radius:10px; border:none; cursor:pointer;
+    background: var(--ocean-mid); color:white; font-family:'Nunito';
+    font-weight:700; font-size:.9rem; transition: background .15s;
+  }
+  .check-btn:hover { background: var(--ocean-deep); }
+  .q-audio-btn {
+    padding: 8px 14px; border-radius:10px; border:none; cursor:pointer;
+    background: var(--sun); color: var(--ocean-deep); font-family:'Nunito';
+    font-weight:700; font-size:.85rem; transition: background .15s;
+  }
+  .q-audio-btn:hover { background: #ffa000; color:white; }
+  .feedback {
+    margin-top:10px; padding:8px 14px; border-radius:10px;
+    font-weight:700; font-size:.88rem; display:none;
+  }
+  .feedback.correct { background:#e8f5e9; color:#2e7d32; display:block; }
+  .feedback.wrong   { background:#fce4ec; color:#c62828; display:block; }
+
+  /* ══════════════════════════
+     PART 3 – LISTEN TALK STICK
+  ══════════════════════════ */
+  
+  .p3-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media(max-width:600px){ .p3-layout { grid-template-columns:1fr; } }
+
+  .clue-list { display:flex; flex-direction:column; gap:12px; }
+  .clue-item {
+    background: var(--ocean-pale); border-radius:12px;
+    padding:12px 16px; border-left:4px solid var(--ocean-bright);
+    font-size:.9rem; line-height:1.6;
+  }
+  .clue-num {
+    font-family:'Fredoka One'; color:var(--ocean-mid);
+    font-size:1rem; margin-bottom:4px;
+  }
+  .clue-audio-btn {
+    margin-top:8px; padding:6px 13px; border-radius:20px;
+    border:none; cursor:pointer; background:var(--ocean-bright); color:white;
+    font-family:'Nunito'; font-weight:700; font-size:.8rem;
+  }
+
+  /* DRAG AREA */
+  .drag-section { }
+  .drag-instructions {
+    font-size:.88rem; color:var(--text-mid); margin-bottom:12px;
+    background: #fff3e0; border-radius:10px; padding:10px 14px;
+    border-left:4px solid var(--sun);
+  }
+  .word-bank {
+    display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;
+    min-height:44px; padding:10px; border-radius:12px;
+    border: 2px dashed var(--ocean-bright); background:rgba(33,150,243,0.05);
+  }
+  .drag-word {
+    padding: 8px 16px; border-radius:20px;
+    background: var(--ocean-mid); color:white;
+    font-family:'Fredoka One'; font-size:.95rem; cursor:grab;
+    user-select:none; transition: transform .15s, box-shadow .15s;
+    touch-action: none;
+  }
+  .drag-word:hover { transform:scale(1.05); box-shadow:0 4px 12px rgba(21,101,168,0.3); }
+  .drag-word.dragging { opacity:.5; cursor:grabbing; }
+
+  .drop-zones { display:flex; flex-direction:column; gap:10px; }
+  .drop-zone-row {
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .drop-zone-label {
+    font-weight:700; font-size:.88rem; min-width:60px; color:var(--ocean-deep);
+    font-family:'Fredoka One';
+  }
+  .drop-zone {
+    flex:1; min-height:44px; min-width:140px;
+    border: 2px dashed #90caf9; border-radius:12px;
+    background: rgba(33,150,243,0.06);
+    display:flex; align-items:center; justify-content:center;
+    padding:4px 10px; transition: all .2s;
+  }
+  .drop-zone.over { border-color:var(--ocean-mid); background:rgba(33,150,243,0.15); }
+  .drop-zone.correct-drop { border-color:var(--green); background:#e8f5e9; }
+  .drop-zone.wrong-drop   { border-color:var(--coral); background:#fce4ec; }
+  .drop-zone .drag-word {
+    background: var(--green); cursor:default; pointer-events:none;
+  }
+
+  .p3-check-btn {
+    margin-top:16px; padding:11px 24px; border-radius:12px;
+    border:none; cursor:pointer;
+    background: var(--coral); color:white; font-family:'Fredoka One';
+    font-size:1rem; transition: background .15s;
+  }
+  .p3-check-btn:hover { background:#e53935; }
+  .p3-result {
+    margin-top:12px; padding:12px 16px; border-radius:12px;
+    font-weight:700; display:none;
+  }
+  .p3-result.show { display:block; }
+  .p3-result.all-correct { background:#e8f5e9; color:#2e7d32; }
+  .p3-result.has-error   { background:#fce4ec; color:#c62828; }
+  .clue-toggle-btn {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin: 6px 0;
+  transition: all 0.2s ease;
+}
+
+.clue-toggle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.clue-toggle-btn:active {
+  transform: scale(0.95);
+.clue-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+}
+.clue-content.show {
+  max-height: 200px;
+  opacity: 1;
+}  
+  /* ══════════════════════════
+     MINI DICTIONARY TOOLTIP
+  ══════════════════════════ */
+  .dict-tooltip {
+    position:fixed; z-index:9999;
+    background: var(--ocean-deep); color:white;
+    border-radius:14px; padding:14px 18px;
+    max-width:280px; min-width:200px;
+    box-shadow:0 8px 32px rgba(10,61,107,0.35);
+    display:none; pointer-events:auto;
+    font-size:.88rem; line-height:1.6;
+  }
+  .dict-tooltip.visible { display:block; }
+  .dict-word { font-family:'Fredoka One'; font-size:1.1rem; margin-bottom:2px; }
+  .dict-ipa { color:#90caf9; font-size:.82rem; margin-bottom:4px; }
+  .dict-type { color:#ffca28; font-size:.78rem; font-weight:700; text-transform:uppercase; margin-bottom:4px; }
+  .dict-vn { color:#b2dfdb; font-weight:700; margin-bottom:6px; }
+  .dict-example { color:#cfd8dc; font-style:italic; font-size:.82rem; }
+  .dict-audio-btn {
+    margin-top:8px; padding:4px 12px; border-radius:20px;
+    border:none; cursor:pointer; background:#1565a8; color:white;
+    font-size:.78rem; font-family:'Nunito'; font-weight:700;
+    pointer-events:all;
+  }
+</style>
+</head>
+<body>
+
+<!-- Animated bubbles -->
+<div class="bubbles-bg" id="bubblesBg"></div>
+
+<!-- Tooltip -->
+<div class="dict-tooltip" id="dictTooltip">
+  <div class="dict-word" id="dtWord"></div>
+  <div class="dict-ipa" id="dtIpa"></div>
+  <div class="dict-type" id="dtType"></div>
+  <div class="dict-vn" id="dtVn"></div>
+  <div class="dict-example" id="dtExample"></div>
+  <button class="dict-audio-btn" id="dtAudioBtn">🔊 Nghe</button>
+</div>
+
+<header>
+  <span class="wave-emoji">🌊</span>
+  <h1>Ocean Pollution – English Lesson</h1>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('p1',this)">📖 Part 1: Vocabulary</button>
+  <button class="tab-btn" onclick="showTab('p2',this)">✏️ Part 2: Read & Write</button>
+  <button class="tab-btn" onclick="showTab('p3',this)">🗣️ Part 3: Listen & Stick</button>
+</div>
+
+<!-- ══════════════════ PART 1 ══════════════════ -->
+<div id="p1" class="panel active">
+<div class="content-wrap">
+
+  <div class="section-card">
+    <div class="section-title">📚 Vocabulary <span class="badge">5 words</span></div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+
+    <div class="knowledge-box">
+      <strong>📝 Kiến thức thu hoạch:</strong> Hôm nay em học 5 từ vựng về ô nhiễm đại dương:<br>
+      <strong>Oil spill</strong> (tràn dầu) · <strong>Garbage</strong> (rác thải) · <strong>Overfishing</strong> (đánh bắt quá mức) · <strong>Plastic</strong> (nhựa) · <strong>Biodegradable</strong> (phân hủy sinh học).<br>
+      Những từ này giúp em hiểu về cách bảo vệ đại dương! 🌊
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════ PART 2 ══════════════════ -->
+<div id="p2" class="panel">
+<div class="content-wrap">
+
+  <div class="section-card coral-top">
+    <div class="section-title">✏️ Read and Write <span class="badge">Fill in the blanks</span></div>
+    <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:18px;">Nghe câu hỏi, sau đó điền từ còn thiếu vào ô trống. Nhấn <strong>Check</strong> để kiểm tra!</p>
+    <div id="p2Questions"></div>
+
+    <div class="knowledge-box">
+      <strong>📝 Kiến thức thu hoạch:</strong><br>
+      ✅ <em>Garbage</em> = tất cả rác thải hàng ngày (vỏ chuối, lon, hộp, đồ chơi hỏng...)<br>
+      ✅ <em>Overfishing</em> = đánh bắt quá nhiều cá khiến cá không kịp sinh sản<br>
+      ✅ <em>Biodegradable</em> = vật liệu tự phân hủy (giấy, thực phẩm)<br>
+      ✅ <em>Plastic</em> = không phân hủy được, gây ô nhiễm lâu dài<br>
+      ✅ <em>Oil spill</em> = tai nạn tàu chở dầu làm dầu tràn ra biển
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════ PART 3 ══════════════════ -->
+<div id="p3" class="panel">
+<div class="content-wrap">
+
+  <div class="section-card green-top">
+    <div class="section-title">🗣️ Listen, Talk & Stick <span class="badge">Drag & Drop</span></div>
+    <p style="font-size:.9rem;color:var(--text-mid);margin-bottom:18px;">Nghe gợi ý, nói câu trả lời với bạn, rồi kéo từ đúng vào ô tương ứng!</p>
+
+    <div class="p3-layout">
+      <!-- Clues -->
+      <div>
+        <div class="clue-list" id="clueList"></div>
+      </div>
+      <!-- Drag & drop -->
+      <div class="drag-section">
+        <div class="drag-instructions">🖱️ Kéo từ đúng vào ô có số tương ứng với câu gợi ý!</div>
+        <div class="word-bank" id="wordBank"></div>
+        <div class="drop-zones" id="dropZones"></div>
+        <button class="p3-check-btn" onclick="checkPart3()">✅ Kiểm tra đáp án</button>
+        <div class="p3-result" id="p3Result"></div>
+      </div>
+    </div>
+
+    <div class="knowledge-box">
+      <strong>📝 Kiến thức thu hoạch:</strong><br>
+      🔵 <em>Oil spill</em> → xảy ra khi tàu chở dầu (tanker) gặp tai nạn<br>
+      🔵 <em>Overfishing</em> → xảy ra khi ngư dân đánh bắt quá nhiều<br>
+      🔵 <em>Garbage</em> → hãy nhặt rác giữ sạch bãi biển<br>
+      🔵 <em>Plastic</em> → làm được chai lọ nhưng không phân hủy<br>
+      🔵 <em>Biodegradable</em> → bìa cứng tự phân hủy, biến mất theo thời gian
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+/* ════════════════════════════════════
+   DATA
+════════════════════════════════════ */
+const VOCAB = [
+  {
+    id:1,
+    word:"Oil spill",
+    vn:"Tràn dầu",
+    ipa:"/ɔɪl spɪl/",
+    type:"noun phrase",
+    en:"There was a bad oil spill near the beach, so we can't swim there.",
+    vi:"Có một vụ tràn dầu nghiêm trọng gần bãi biển, vì vậy chúng ta không thể bơi ở đó.",
+    emoji:"🛢️",
+    img:"part1/1.jpg",
+    audioWord:"part1/1.wav",
+    audioEx:"part1/2.wav"
+  },
+  {
+    id:2,
+    word:"Garbage",
+    vn:"Rác thải",
+    ipa:"/ˈɡɑːrbɪdʒ/",
+    type:"noun",
+    en:"Don't throw garbage on the beach.",
+    vi:"Đừng vứt rác trên bãi biển.",
+    emoji:"🗑️",
+    img:"part1/2.jpg",
+    audioWord:"part1/3.wav",
+    audioEx:"part1/4.wav"
+  },
+  {
+    id:3,
+    word:"Overfishing",
+    vn:"Đánh bắt quá mức",
+    ipa:"/ˌoʊvərˈfɪʃɪŋ/",
+    type:"noun",
+    en:"We need to stop overfishing.",
+    vi:"Chúng ta cần ngừng việc đánh bắt cá quá mức.",
+    emoji:"🐟",
+    img:"part1/3.jpg",
+    audioWord:"part1/5.wav",
+    audioEx:"part1/6.wav"
+  },
+  {
+    id:4,
+    word:"Plastic",
+    vn:"Nhựa",
+    ipa:"/ˈplæstɪk/",
+    type:"noun / adjective",
+    en:"Don't throw plastic bags in the water. Fish and birds can get hurt.",
+    vi:"Đừng vứt túi nilon xuống nước. Cá và chim có thể bị thương.",
+    emoji:"♻️",
+    img:"part1/4.jpg",
+    audioWord:"part1/7.wav",
+    audioEx:"part1/8.wav"
+  },
+  {
+    id:5,
+    word:"Biodegradable",
+    vn:"Phân hủy sinh học",
+    ipa:"/ˌbaɪoʊdɪˈɡreɪdəbl/",
+    type:"adjective",
+    en:"Food is biodegradable.",
+    vi:"Thực phẩm là chất có thể phân hủy sinh học.",
+    emoji:"🌿",
+    img:"part1/5.jpg",
+    audioWord:"part1/9.wav",
+    audioEx:"part1/10.wav"
+  }
+];
+
+const P2_QUESTIONS = [
+  {
+    id:1,
+    text:"Banana peels, plastic bottles, soda cans, old newspapers, boxes, and broken toys are examples of ___.",
+    answer:"garbage",
+    audio:"part2/1.wav",
+    full:"Banana peels, plastic bottles, soda cans, old newspapers, boxes, and broken toys are examples of garbage."
+  },
+  {
+    id:2,
+    text:"When companies catch too many fish all the time, there aren't enough fish left to reproduce. This is called ___.",
+    answer:"overfishing",
+    audio:"part2/2.wav",
+    full:"When companies catch too many fish all the time, there aren't enough fish left to reproduce. This is called overfishing."
+  },
+  {
+    id:3,
+    text:"Paper is ___. With time, it disappears.",
+    answer:"biodegradable",
+    audio:"part2/3.wav",
+    full:"Paper is biodegradable. With time, it disappears."
+  },
+  {
+    id:4,
+    text:"Bottles and bags made out of ___ are not biodegradable.",
+    answer:"plastic",
+    audio:"part2/4.wav",
+    full:"Bottles and bags made out of plastic are not biodegradable."
+  },
+  {
+    id:5,
+    text:"Big ships called tankers transport oil across the ocean. When they have an accident and oil escapes, the result is an ___.",
+    answer:"oil spill",
+    audio:"part2/5.wav",
+    full:"Big ships called tankers transport oil across the ocean. When they have an accident and oil escapes, the result is an oil spill."
+  }
+];
+
+const P3_CLUES = [
+  {
+    id:1,
+    vn:"Điều này xảy ra khi các tàu chở dầu gặp tai nạn trên đại dương",
+    en:"This happens when tankers have accidents in the ocean.",
+    answer:"Oil spill",
+    audio:"part3/1.wav"
+  },
+  {
+    id:2,
+    vn:"Điều này xảy ra khi ngư dân đánh bắt quá nhiều cá",
+    en:"This happens when fishermen catch too many fish.",
+    answer:"Overfishing",
+    audio:"part3/2.wav"
+  },
+  {
+    id:3,
+    vn:"Để giữ cho đại dương sạch sẽ. Nếu bạn thấy cái này trên bãi biển, hãy nhặt nó lên",
+    en:"To keep the ocean clean. If you see this on the beach, pick it up.",
+    answer:"Garbage",
+    audio:"part3/3.wav"
+  },
+  {
+    id:4,
+    vn:"Bạn có thể làm chai lọ bằng vật liệu này. Nó không thể phân hủy sinh học",
+    en:"You can make bottles with this material. It's not biodegradable.",
+    answer:"Plastic",
+    audio:"part3/4.wav"
+  },
+  {
+    id:5,
+    vn:"Các-tông không thực sự là rác thải. Nó biến mất theo thời gian",
+    en:"Cardboard is not really garbage. It disappears with time.",
+    answer:"Biodegradable",
+    audio:"part3/5.wav"
+  }
+];
+
+/* DICTIONARY DATA */
+const DICT = {
+  "banana peels":  { ipa:"/bəˈnænə piːlz/", type:"noun", vn:"Vỏ chuối", ex:"Banana peels are biodegradable.", audio:"part4/1.wav" },
+  "plastic bottles":{ ipa:"/ˈplæstɪk ˈbɒtlz/", type:"noun", vn:"Chai nhựa", ex:"Don't throw plastic bottles in the ocean.", audio:"part4/2.wav" },
+  "soda cans":     { ipa:"/ˈsoʊdə kænz/", type:"noun", vn:"Lon nước ngọt", ex:"Put soda cans in the recycling bin.", audio:"part4/3.wav" },
+  "old newspapers":{ ipa:"/oʊld ˈnjuːzpeɪpərz/", type:"noun", vn:"Báo cũ", ex:"Old newspapers are biodegradable.", audio:"part4/4.wav" },
+  "boxes":         { ipa:"/ˈbɒksɪz/", type:"noun", vn:"Hộp (bìa)", ex:"Cardboard boxes are biodegradable.", audio:"part4/5.wav" },
+  "broken toys":   { ipa:"/ˈbroʊkən tɔɪz/", type:"noun", vn:"Đồ chơi hỏng", ex:"Broken toys are a type of garbage.", audio:"part4/6.wav" },
+  "companies":     { ipa:"/ˈkʌmpəniz/", type:"noun", vn:"Các công ty", ex:"Some companies catch too many fish.", audio:"part4/7.wav" },
+  "reproduce":     { ipa:"/ˌriːprəˈdjuːs/", type:"verb", vn:"Sinh sản", ex:"Fish need time to reproduce.", audio:"part4/8.wav" },
+  "disappears":    { ipa:"/ˌdɪsəˈpɪərz/", type:"verb", vn:"Biến mất", ex:"Paper disappears over time.", audio:"part4/9.wav" },
+  "biodegradable": { ipa:"/ˌbaɪoʊdɪˈɡreɪdəbl/", type:"adjective", vn:"Phân hủy sinh học", ex:"Food is biodegradable.", audio:"part4/10.wav" },
+  "tankers":       { ipa:"/ˈtæŋkərz/", type:"noun", vn:"Tàu chở dầu", ex:"Tankers transport oil across the ocean.", audio:"part4/11.wav" },
+  "transport oil": { ipa:"/trænsˈpɔːrt ɔɪl/", type:"verb phrase", vn:"Vận chuyển dầu", ex:"Big ships transport oil across oceans.", audio:"part4/12.wav" },
+  "across":        { ipa:"/əˈkrɒs/", type:"preposition", vn:"Qua, băng qua", ex:"The ship sailed across the ocean.", audio:"part4/13.wav" },
+  "an accident":   { ipa:"/ən ˈæksɪdənt/", type:"noun phrase", vn:"Một tai nạn", ex:"The tanker had an accident at sea.", audio:"part4/14.wav" },
+  "oil escapes":   { ipa:"/ɔɪl ɪˈskeɪps/", type:"verb phrase", vn:"Dầu tràn ra", ex:"When oil escapes, it pollutes the ocean.", audio:"part4/15.wav" },
+  "the result":    { ipa:"/ðə rɪˈzʌlt/", type:"noun phrase", vn:"Kết quả", ex:"The result of the accident was an oil spill.", audio:"part4/16.wav" }
+};
+
+/* ════════════════════════════════════
+   AUDIO HELPER
+════════════════════════════════════ */
+// function playAudio(file) {
+//   const audio = new Audio(file);
+//   audio.onerror = () => speakText(text);
+//   audio.play().catch(() => speakText(text));
+// }
+// function speakText(text) {
+//   if (!window.speechSynthesis) return;
+//   const u = new SpeechSynthesisUtterance(text);
+//   u.lang = 'en-US'; u.rate = 0.9;
+//   window.speechSynthesis.cancel();
+//   window.speechSynthesis.speak(u);
+// }
+let currentAudio = null;
+let currentBtn = null;
+function playAudio(src, btn) {
+  // Stop current
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentBtn) currentBtn.classList.remove('playing');
+  }
+
+  // If same button → stop
+  if (currentBtn === btn) {
+    currentAudio = null;
+    currentBtn = null;
+    return;
+  }
+
+  const audio = new Audio(src);
+  audio.onerror = () => {
+    // fallback to TTS if file not found
+    const text = btn.closest('.dialogue-line, .fill-item')?.querySelector('.line-en, .fill-sentence')?.textContent;
+    if (text) speakEnglish(text);
+    btn.classList.remove('playing');
+    currentBtn = null;
+  };
+  audio.onended = () => {
+    btn.classList.remove('playing');
+    if (currentBtn === btn) currentBtn = null;
+  };
+
+  btn.classList.add('playing');
+  currentAudio = audio;
+  currentBtn = btn;
+  audio.play().catch(() => {
+    // TTS fallback
+    const text = btn.closest('.dialogue-line, .fill-item')?.querySelector('.line-en, .fill-sentence')?.textContent?.replace(/\?\?\?/g, '');
+    if (text) speakEnglish(text);
+    btn.classList.remove('playing');
+    currentBtn = null;
+  });
+}
+/* ════════════════════════════════════
+   BUBBLES
+════════════════════════════════════ */
+(function() {
+  const bg = document.getElementById('bubblesBg');
+  for (let i=0;i<18;i++) {
+    const b = document.createElement('div');
+    b.className='bubble';
+    const s = 20+Math.random()*60;
+    b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;
+      animation-duration:${8+Math.random()*14}s;
+      animation-delay:${-Math.random()*14}s;`;
+    bg.appendChild(b);
+  }
+})();
+
+/* ════════════════════════════════════
+   TABS
+════════════════════════════════════ */
+function showTab(id, btn) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ════════════════════════════════════
+   PART 1 – VOCAB CARDS
+════════════════════════════════════ */
+function buildVocabCards() {
+  const grid = document.getElementById('vocabGrid');
+  VOCAB.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'vocab-card';
+    card.innerHTML = `
+      <div class="vocab-img">
+        <img src="${v.img}" alt="${v.word}" onerror="this.parentElement.innerHTML='<span class=\\'img-fallback\\'>${v.emoji}</span>'">
+      </div>
+      <div class="vocab-body">
+        <div class="vocab-word">${v.word}</div>
+        <div class="vocab-vn">${v.vn} &nbsp;<span style="color:#90a4ae;font-size:.78rem;">${v.ipa}</span></div>
+        <div class="vocab-en" id="ve${v.id}">
+          <em>${v.en}</em>
+          <div class="vn-example">${v.vi}</div>
+        </div>
+        <div class="vocab-actions">
+          <button class="audio-btn word-btn" onclick="playAudio('${v.audioWord}',this)">🔊</button>
+          
+          <button class="audio-btn example-btn" onclick="playAudio('${v.audioEx}',this)">🔊 Câu</button>
+          <button class="toggle-vn-btn" onclick="toggleVn(${v.id},this)">🇻🇳 Tiếng Việt</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+function toggleVn(id, btn) {
+  const el = document.getElementById('ve'+id);
+  el.classList.toggle('show-vn');
+  btn.textContent = el.classList.contains('show-vn') ? '🙈 Ẩn' : '🇻🇳 Tiếng Việt';
+}
+
+/* ════════════════════════════════════
+   PART 2 – READ & WRITE
+════════════════════════════════════ */
+function buildPart2() {
+  const cont = document.getElementById('p2Questions');
+  P2_QUESTIONS.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question-block';
+    // wrap clickable words
+    let displayText = wrapDictWords(q.text);
+    div.innerHTML = `
+      <div class="question-text">${i+1}. ${displayText}</div>
+      <div class="answer-row">
+        <button class="q-audio-btn" onclick="playAudio('${q.audio}',this)">🔊 Nghe câu</button>
+        <input class="answer-input" id="ai${q.id}" placeholder="Điền từ vào đây..." onkeydown="if(event.key==='Enter')checkP2(${q.id})">
+        <button class="check-btn" onclick="checkP2(${q.id})">✅ Check</button>
+      </div>
+      <div class="feedback" id="fb${q.id}"></div>`;
+    cont.appendChild(div);
+  });
+}
+function checkP2(id) {
+  const q = P2_QUESTIONS.find(x=>x.id===id);
+  const inp = document.getElementById('ai'+id);
+  const fb  = document.getElementById('fb'+id);
+  const val = inp.value.trim().toLowerCase();
+  if (!val) return;
+  if (val === q.answer.toLowerCase()) {
+    inp.className='answer-input correct';
+    fb.className='feedback correct';
+    fb.textContent='✅ Chính xác! Câu đúng: '+q.full;
+  } else {
+    inp.className='answer-input wrong';
+    fb.className='feedback wrong';
+    fb.textContent='❌ Chưa đúng! Đáp án: '+q.answer;
+  }
+}
+
+/* ════════════════════════════════════
+   PART 3 – DRAG & DROP
+════════════════════════════════════ */
+const P3_ANSWERS = {}; // zoneId -> word placed
+
+function buildPart3() {
+  // Clues
+  const clueList = document.getElementById('clueList');
+  P3_CLUES.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'clue-item';
+    div.innerHTML = `
+    <div class="clue-num">Câu ${c.id}</div>
+
+    <button class="clue-toggle-btn" onclick="toggleClue(this)">👁️ Hiện </button>
+
+    <div class="clue-content" style="display:none;">
+      <div>${c.en}</div>
+      <div style="color:#78909c;font-style:italic;font-size:.82rem;margin-top:4px;">
+        ${c.vn}
+      </div>
+    </div>
+
+    <button class="clue-audio-btn" onclick="playAudio('${c.audio}',this)">🔊 Nghe </button>
+  `;
+    clueList.appendChild(div);
+  });
+
+  // Word bank (shuffled)
+  const words = [...P3_CLUES.map(c=>c.answer)].sort(()=>Math.random()-.5);
+  const bank = document.getElementById('wordBank');
+  words.forEach(w => {
+    const span = document.createElement('div');
+    span.className = 'drag-word';
+    span.textContent = w;
+    span.draggable = true;
+    span.dataset.word = w;
+    makeDraggable(span);
+    bank.appendChild(span);
+  });
+
+  // Drop zones
+  const zones = document.getElementById('dropZones');
+  P3_CLUES.forEach(c => {
+    const row = document.createElement('div');
+    row.className = 'drop-zone-row';
+    const lbl = document.createElement('div');
+    lbl.className = 'drop-zone-label';
+    lbl.textContent = 'Câu '+c.id+':';
+    const zone = document.createElement('div');
+    zone.className = 'drop-zone';
+    zone.dataset.zoneId = c.id;
+    makeDropZone(zone);
+    row.appendChild(lbl); row.appendChild(zone);
+    zones.appendChild(row);
+  });
+}
+
+let draggedEl = null;
+function makeDraggable(el) {
+  el.addEventListener('dragstart', e => {
+    draggedEl = el;
+    el.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  el.addEventListener('dragend', () => {
+    el.classList.remove('dragging');
+    draggedEl = null;
+  });
+  // touch
+  el.addEventListener('touchstart', touchStart, {passive:true});
+  el.addEventListener('touchmove',  touchMove, {passive:false});
+  el.addEventListener('touchend',   touchEnd);
+}
+
+let touchClone = null, touchSource = null;
+function touchStart(e) {
+  touchSource = e.currentTarget;
+  const t = e.touches[0];
+  touchClone = touchSource.cloneNode(true);
+  touchClone.style.cssText=`position:fixed;z-index:9999;opacity:.8;pointer-events:none;
+    width:${touchSource.offsetWidth}px;padding:8px 16px;border-radius:20px;
+    background:var(--ocean-mid);color:white;font-family:'Fredoka One';font-size:.95rem;`;
+  document.body.appendChild(touchClone);
+  moveClone(t.clientX, t.clientY);
+}
+function touchMove(e) {
+  e.preventDefault();
+  const t = e.touches[0];
+  moveClone(t.clientX, t.clientY);
+}
+function moveClone(x,y) {
+  if (!touchClone) return;
+  touchClone.style.left=(x-40)+'px';
+  touchClone.style.top=(y-20)+'px';
+}
+function touchEnd(e) {
+  if (!touchClone || !touchSource) return;
+  const t = e.changedTouches[0];
+  touchClone.remove(); touchClone=null;
+  const el = document.elementFromPoint(t.clientX, t.clientY);
+  let zone = el ? el.closest('.drop-zone') : null;
+  if (zone) dropOnZone(zone, touchSource);
+  touchSource = null;
+}
+
+function makeDropZone(zone) {
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('over');
+    if (draggedEl) dropOnZone(zone, draggedEl);
+  });
+}
+
+function dropOnZone(zone, wordEl) {
+  const zid = zone.dataset.zoneId;
+  // return existing word to bank
+  if (zone.firstChild) {
+    const old = zone.firstChild;
+    old.draggable = true;
+    makeDraggable(old);
+    document.getElementById('wordBank').appendChild(old);
+    delete P3_ANSWERS[zid];
+  }
+  // also return word to bank if it came from another zone
+  if (wordEl.parentElement && wordEl.parentElement.classList.contains('drop-zone')) {
+    delete P3_ANSWERS[wordEl.parentElement.dataset.zoneId];
+  }
+  zone.appendChild(wordEl);
+  wordEl.draggable = false;
+  P3_ANSWERS[zid] = wordEl.dataset.word;
+  zone.classList.remove('correct-drop','wrong-drop');
+}
+
+function checkPart3() {
+  let correct=0;
+  P3_CLUES.forEach(c => {
+    const zone = document.querySelector(`.drop-zone[data-zone-id="${c.id}"]`);
+    if (!zone) return;
+    zone.classList.remove('correct-drop','wrong-drop');
+    const placed = P3_ANSWERS[c.id];
+    if (placed && placed.toLowerCase()===c.answer.toLowerCase()) {
+      zone.classList.add('correct-drop'); correct++;
+    } else if (placed) {
+      zone.classList.add('wrong-drop');
+    }
+  });
+  const res = document.getElementById('p3Result');
+  res.classList.add('show');
+  if (correct===P3_CLUES.length) {
+    res.className='p3-result show all-correct';
+    res.textContent='🎉 Tuyệt vời! Em làm đúng tất cả '+correct+'/'+P3_CLUES.length+' câu!';
+  } else {
+    res.className='p3-result show has-error';
+    res.textContent='💪 Em làm đúng '+correct+'/'+P3_CLUES.length+' câu. Thử lại nhé!';
+  }
+}
+
+/* ════════════════════════════════════
+   DICTIONARY TOOLTIP
+════════════════════════════════════ */
+function wrapDictWords(text) {
+  // sort by length desc to match longest first
+  const keys = Object.keys(DICT).sort((a,b)=>b.length-a.length);
+  let result = text;
+  keys.forEach(k => {
+    const re = new RegExp('\\b'+k.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')+'\\b','gi');
+    result = result.replace(re, m =>
+      `<span class="gap-word" data-dict="${k.toLowerCase()}">${m}</span>`);
+  });
+  return result;
+}
+
+const tooltip = document.getElementById('dictTooltip');
+// document.addEventListener('mouseover', e => {
+//   const t = e.target.closest('[data-dict]');
+//   if (!t) { tooltip.classList.remove('visible'); return; }
+//   const key = t.dataset.dict;
+//   const d = DICT[key];
+//   if (!d) return;
+//   document.getElementById('dtWord').textContent = t.textContent;
+//   document.getElementById('dtIpa').textContent = d.ipa;
+//   document.getElementById('dtType').textContent = d.type;
+//   document.getElementById('dtVn').textContent = d.vn;
+//   document.getElementById('dtExample').textContent = d.ex;
+//   document.getElementById('dtAudioBtn').onclick = () => playAudio(d.audio, t.textContent);
+//   const r = t.getBoundingClientRect();
+//   tooltip.style.left = Math.min(r.left, window.innerWidth-300)+'px';
+//   tooltip.style.top = (r.bottom+8)+'px';
+//   tooltip.classList.add('visible');
+//   tooltip.style.pointerEvents='all';
+// });
+let currentTarget = null;
+
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-dict]');
+  const tooltip = document.getElementById('dictTooltip');
+
+  // 👉 Click ra ngoài → ẩn
+  if (!t && !e.target.closest('#dictTooltip')) {
+    tooltip.classList.remove('visible');
+    currentTarget = null;
+    return;
+  }
+
+  // 👉 Nếu click vào từ
+  if (t) {
+    // 👉 Click lại cùng 1 từ → toggle ẩn
+    if (currentTarget === t) {
+      tooltip.classList.remove('visible');
+      currentTarget = null;
+      return;
+    }
+
+    currentTarget = t;
+
+    const key = t.dataset.dict;
+    const d = DICT[key];
+    if (!d) return;
+
+    document.getElementById('dtWord').textContent = t.textContent;
+    document.getElementById('dtIpa').textContent = d.ipa;
+    document.getElementById('dtType').textContent = d.type;
+    document.getElementById('dtVn').textContent = d.vn;
+    document.getElementById('dtExample').textContent = d.ex;
+
+    document.getElementById('dtAudioBtn').onclick = () => playAudio(d.audio, t);
+
+    const r = t.getBoundingClientRect();
+    tooltip.style.left = Math.min(r.left, window.innerWidth - 300) + 'px';
+    tooltip.style.top = (r.bottom + 8) + 'px';
+
+    tooltip.classList.add('visible');
+  }
+});
+// document.addEventListener('mouseleave', e => {
+//   if (!e.relatedTarget || !e.relatedTarget.closest('#dictTooltip'))
+//     setTimeout(()=>{ if(!tooltip.matches(':hover')) tooltip.classList.remove('visible'); },300);
+// }, true);
+// document.getElementById('dictTooltip').addEventListener('mouseleave', () => {
+//   tooltip.classList.remove('visible');
+//   tooltip.style.pointerEvents='none';
+// });
+function toggleClue(btn) {
+  const content = btn.parentElement.querySelector('.clue-content');
+  
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    btn.textContent = '🙈 Ẩn';
+  } else {
+    content.style.display = 'none';
+    btn.textContent = '👁️ Hiện';
+  }
+}
+/* ════════════════════════════════════
+   INIT
+════════════════════════════════════ */
+buildVocabCards();
+buildPart2();
+buildPart3();
+</script>
+</body>
+</html>
